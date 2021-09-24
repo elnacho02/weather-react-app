@@ -37,12 +37,10 @@ export default function App() {
         setCurrentCity(ciudad);
         if (!cities.some(item => item.name === ciudad.name)){
         setCities(cities=>[...cities, ciudad ])}
-      }else{Swal.fire({
-        title: 'CIUDAD NO ENCONTRADA',
-        text: 'Do you want to continue',
-        icon: 'error',
-        confirmButtonText: 'Cool'
-      });
+      }else{Swal.fire(
+        'CIUDAD NO ENCONTRADA',
+        'question'
+      );
     }
     })
   }
