@@ -17,7 +17,7 @@ export default function App() {
   const [currentCity, setCurrentCity] = useState("");
   
   const onSearch=(ciudad)=>{
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiK}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiK}&units=metric`)
     .then(r=> r.json())
     .then((rec)=>{
       if(rec.main !== undefined){
@@ -48,7 +48,7 @@ export default function App() {
   }
   var [flag, setFlag]=useState(true);
   const onSearch2=(ciudad)=>{
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiK}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiK}&units=metric`)
     .then(r=> r.json())
     .then((rec)=>{
       if(rec.main !== undefined){
