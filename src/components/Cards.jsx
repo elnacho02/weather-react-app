@@ -6,18 +6,23 @@ import CurrentCard from './CurrentCard';
 
 export default function Cards(props) {
   if(props.cities){
-    return (
+    return ( 
       <div className={s.Cards_container}>
         {props.cities.map(elem =>{
           if(elem.id === props.currentId)return null;
-          return(<Card
-            max={elem.max}
-            min={elem.min}
-            name={elem.name}
-            img={elem.img}
-            onClose={() => props.onClose(elem.id)}
-            id={elem.id}
-          />)
+          return(
+            <div>
+              <Card
+                max={elem.max}
+                min={elem.min}
+                name={elem.name}
+                img={elem.img}
+                onClose={() => props.onClose(elem.id)}
+                id={elem.id}
+              />
+            
+          </div>
+          )
         } )}
       </div>
     );

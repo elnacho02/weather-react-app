@@ -1,8 +1,9 @@
 import React from 'react';
 import  { useState } from 'react';
 import Card from "./Card";
-import "./CurrentCard.css";
 import Loader from './Loader';
+
+
 
 function CurrentCard(props) {
 const elem = props.city;

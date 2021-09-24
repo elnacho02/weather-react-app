@@ -1,19 +1,20 @@
 import React from 'react';
 import './App.css';
-import BackgroundImg from "./components/BackgroundImg";
 import { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import About from "./components/About"
 import Cards from "./components/Cards";
-import Card from './components/Card';
-import CurrentCard from './components/CurrentCard';
 import Cover from './components/Cover';
 import NavBar from './components/NavBar';
+import City from './components/City';
+import CurrentContainer from './components/CurrentContainer';
+import { Route } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function App() {
   
   const [cities, setCities] = useState([]);
   const apiK = "59096b27e252638ce3fa6295e56f2b28";
-  const [currentCity, setCurrentCity] = useState([]);
+  const [currentCity, setCurrentCity] = useState("");
   
   const onSearch=(ciudad)=>{
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiK}&units=metric`)
@@ -26,14 +27,23 @@ export default function App() {
           img: rec.weather[0].icon,
           id: rec.id,
           name: rec.name,
+          wind: rec.wind.speed,
+          temp: rec.main.temp,
+          weather: rec.weather[0].main,
+          clouds: rec.clouds.all,
+          latitud: rec.coord.lat,
+          longitud: rec.coord.lon
         };
         setCurrentCity(ciudad);
-        setCities(cities=>[...cities, ciudad])
-
-        
-        
-      }else{alert("Ciudad no encontrada");
-      }
+        if (!cities.some(item => item.name === ciudad.name)){
+        setCities(cities=>[...cities, ciudad ])}
+      }else{Swal.fire({
+        title: 'CIUDAD NO ENCONTRADA',
+        text: 'Do you want to continue',
+        icon: 'error',
+        confirmButtonText: 'Cool'
+      });
+    }
     })
   }
   var [flag, setFlag]=useState(true);
@@ -48,6 +58,12 @@ export default function App() {
           img: rec.weather[0].icon,
           id: rec.id,
           name: rec.name,
+          wind: rec.wind.speed,
+          temp: rec.main.temp,
+          weather: rec.weather[0].main,
+          clouds: rec.clouds.all,
+          latitud: rec.coord.lat,
+          longitud: rec.coord.lon
         };
         setFlag(false)
         setCities(cities=>[...cities, ciudad])
@@ -64,26 +80,27 @@ export default function App() {
   const onClose = (id)=>{
     setCities(oldCities=> oldCities.filter(c=> c.id !== id));
   }
+  function onFilter(ciudadId) {
+    let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
+    if(ciudad.length > 0) {
+        return ciudad[0];
+    } 
+    else if (currentCity.id === parseInt(ciudadId)){
+        return currentCity;
+    }
+  }
+  
+  
+  
   return (
-      
-      <div className="App">
-        <NavBar />
-        <div className="recent-card-container">
-          {/* <header>
-            <h2>WEATHER APP</h2>
-          </header> */}
-          <div className="last-div">
-              <SearchBar onSearch={onSearch}/>
-          </div>
-          
-          <BackgroundImg city={currentCity}/>
-          <CurrentCard city={currentCity} flag={false} onClose={onCloseCurrent}/>
-          </div>
-          <Cover cities={cities} city={currentCity}/>  
-      <div>
-        <Cards cities={cities} onClose={onClose} currentId={currentCity.id}/>
-      </div>
-      
+    <div className="App">
+      <Route path="/" component={NavBar}  />
+      {/* <Route exact path='/' render={() =>  <Cover city={currentCity} />}/> */}
+      <Route exact path='/' render={() =>  <CurrentContainer city={currentCity} onClose={onCloseCurrent} onSearch={onSearch}/>}/>
+      <Route exact path='/' render={() =>  <Cards cities={cities} onClose={onClose} currentId={currentCity.id}/>}/>
+      <Route path='/about' component={About}/>
+      <Route exact path='/ciudad/:ciudadId' 
+             render={({match}) => (<City city={onFilter(match.params.ciudadId)}/>)}/>
     </div>
   );
 }
