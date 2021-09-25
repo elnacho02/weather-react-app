@@ -12,7 +12,7 @@ function About() {
                     <video src={coverVideo} autoPlay loop muted></video>
                 </div>
                 <div className="footer-container">
-                    <a href="https://elnacho02.github.io/portfolio-responsive/"><h2>My Portfolio</h2></a>
+                    <a href="https://elnacho02.github.io/portfolio-responsive/" target="_blank" rel="noreferrer"><h2>My Portfolio</h2></a>
                 </div>
             </div>
         </div>
