@@ -15,7 +15,7 @@ function City(props) {
                     <h5>Temperatura: {props.city.temp}°</h5>
                     <h5>Clima: {props.city.weather}</h5>
                     <h5>Viento: {props.city.wind} ms/s</h5>
-                    <h5>Nubosidad: {props.city.clouds}</h5>
+                    <h5>Nubosidad: {props.city.clouds}%</h5>
                 </div>
             </div>
         </div>
