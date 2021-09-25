@@ -14,7 +14,7 @@ export default function Cover(props) {
     else if(props.img==="05d"||props.img==="50d" || props.img==="10d" || props.img==="10n" || props.img==="09n")coverVideo=lluvia;
     /*nublado*/
     else if(props.img==="04d"||props.img==="04n"||props.img==="03n")coverVideo=nublado;
-    else if(props.img ==="01n") coverVideo=noche;
+    else if(props.img ==="01n" || props.img ==="02n") coverVideo=noche;
     return (
         <div className="cover-container">
             <video  classname="video" src={coverVideo} autoPlay loop muted></video>
