@@ -9,6 +9,7 @@ import City from './components/City';
 import CurrentContainer from './components/CurrentContainer';
 import { Route } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Backgrounds from './components/Backgrounds';
 
 export default function App() {
   
@@ -92,6 +93,7 @@ export default function App() {
   
   return (
     <div className="App">
+      <Route path="/" component={Backgrounds}  />
       <Route path="/" component={NavBar}  />
       {/* <Route exact path='/' render={() =>  <Cover city={currentCity} />}/> */}
       <Route exact path='/' render={() =>  <CurrentContainer city={currentCity} onClose={onCloseCurrent} onSearch={onSearch}/>}/>

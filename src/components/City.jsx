@@ -4,7 +4,7 @@ import "./Cover.css"
 import CoverCity from './CoverCity';
 function City(props) {
     return (
-        <div>
+        <div className={s.mainContainer}>
         <CoverCity img={props.city.img}/>
         <div className={s.container}>
             
